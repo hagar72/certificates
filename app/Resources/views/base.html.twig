@@ -1,13 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <meta charset="utf-8">
+        <title>Solvians - Certificates</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+            <!--Main CSS for the website-->
+            <link href="{{ asset('bundles/solvianscertificate/css/main.css') }}" media="all" rel="stylesheet" type="text/css">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div class="container-fluid demo-2">
+            {% block header %}
+                {% include 'SolviansCertificateBundle::menu.html.twig' %}
+            {% endblock %}
+            
+            {% block body %}
+                
+            {% endblock %}
+            
+            
+            {% block footer %}
+                <footer class="clearfix">
+                    
+                </footer>
+            {% endblock %}
+        </div>
+        <!--container fluid--> 
+        {% block javascripts %}
+            
+        {% endblock %}
     </body>
 </html>

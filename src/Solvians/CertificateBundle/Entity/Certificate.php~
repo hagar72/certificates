@@ -1,0 +1,64 @@
+<?php
+
+namespace Solvians\CertificateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Certificate
+ *
+ * @ORM\Table(name="certificates", indexes={@ORM\Index(name="fk_certificates_table11_idx", columns={"currency"})})
+ * @ORM\Entity
+ */
+class Certificate
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="isin", type="string", length=45, nullable=true)
+     */
+    private $isin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="trading_market", type="string", length=45, nullable=true)
+     */
+    private $tradingMarket;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="issuer", type="string", length=45, nullable=true)
+     */
+    private $issuer;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="issuing_price", type="string", length=45, nullable=true)
+     */
+    private $issuingPrice;
+
+    /**
+     * @var \Solvians\CertificateBundle\Entity\Currency
+     *
+     * @ORM\OneToOne(targetEntity="Solvians\CertificateBundle\Entity\Currency")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="currency", referencedColumnName="id", unique=true)
+     * })
+     */
+    private $currency;
+
+
+}
+

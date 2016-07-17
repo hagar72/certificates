@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Certificate list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Isin</th>
+                <th>Tradingmarket</th>
+                <th>Currency</th>
+                <th>Issuer</th>
+                <th>Issuingprice</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for certificate in certificates %}
+            <tr>
+                <td><a href="{{ path('certificates_show', { 'id': certificate.id }) }}">{{ certificate.id }}</a></td>
+                <td>{{ certificate.isin }}</td>
+                <td>{{ certificate.tradingMarket }}</td>
+                <td>{{ certificate.currency.currency }}</td>
+                <td>{{ certificate.issuer }}</td>
+                <td>{{ certificate.issuingPrice }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('certificates_show', { 'id': certificate.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('certificates_edit', { 'id': certificate.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('certificates_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

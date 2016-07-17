@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Currency list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Currency</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for currency in currencies %}
+            <tr>
+                <td><a href="{{ path('currencies_show', { 'id': currency.id }) }}">{{ currency.id }}</a></td>
+                <td>{{ currency.currency }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('currencies_show', { 'id': currency.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('currencies_edit', { 'id': currency.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('currencies_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

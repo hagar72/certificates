@@ -1,0 +1,50 @@
+<?php
+
+namespace Solvians\CertificateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CertificatePrice
+ *
+ * @ORM\Table(name="certificate_prices", indexes={@ORM\Index(name="fk_certificate_prices_certificates1_idx", columns={"certificates_id"})})
+ * @ORM\Entity
+ */
+class CertificatePrice
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="string", length=45, nullable=true)
+     */
+    private $price;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_date", type="datetime", nullable=true)
+     */
+    private $createdDate;
+
+    /**
+     * @var \Solvians\CertificateBundle\Entity\Certificate
+     *
+     * @ORM\OneToOne(targetEntity="Solvians\CertificateBundle\Entity\Certificate")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="certificates_id", referencedColumnName="id", unique=true)
+     * })
+     */
+    private $certificates;
+
+
+}
+

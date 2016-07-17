@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Certificate creation</h1>
+
+    <div class="col-md-6 col-lg-6">
+        {{ form_start(form) }}
+           {{ form_row(form._token) }}
+           <div class="col-md-6 col-lg-12 form-group">
+               <div class="error">{{ form_errors(form.isin) }}</div>
+               {{ form_widget(form.isin, { 'type': 'text', 'attr': {'placeholder': 'ISIN', 'class': 'form-control', 'id': 'isin'} }) }}
+           </div>
+           <div class="col-md-6 col-lg-12 form-group">
+               <div class="error">{{ form_errors(form.tradingMarket) }}</div>
+               {{ form_widget(form.tradingMarket, { 'attr': {'placeholder': 'Trading Market', 'class': 'form-control', 'id': 'tradingMarket'} }) }}
+           </div>
+           <div class="col-md-6 col-lg-6 form-group">
+               <div class="error">{{ form_errors(form.currency) }}</div>
+               {{ form_widget(form.currency, {  'attr': {'class': 'select-list'} }) }}
+           </div>
+
+           <div class="col-md-6 col-lg-12 form-group">
+               <div class="error">{{ form_errors(form.issuer) }}</div>
+               {{ form_widget(form.issuer, { 'attr': {'placeholder': 'Trading Market', 'class': 'form-control', 'id': 'issuer'} }) }}
+           </div>
+           <div class="col-md-6 col-lg-12 form-group">
+               <div class="error">{{ form_errors(form.issuingPrice) }}</div>
+               {{ form_widget(form.issuingPrice, { 'attr': {'placeholder': 'Issuing Price', 'class': 'form-control', 'id': 'issuingPrice'} }) }}
+           </div>
+           <div class="col-md-6 col-lg-12 form-group">
+               <div class="error">{{ form_errors(form.currentPrice) }}</div>
+               {{ form_widget(form.currentPrice, { 'attr': {'placeholder': 'Current Price', 'class': 'form-control', 'id': 'currentPrice'} }) }}
+           </div>
+
+           <br/>
+           <div class="col-md-12">
+               <input type="submit" value="Create" />
+           </div>
+       {{ form_end(form) }}
+    </div>
+    <div class="col-md-6 col-lg-12">
+        <ul>
+            <li>
+                <a href="{{ path('certificates_index') }}">Back to the list</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

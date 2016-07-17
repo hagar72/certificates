@@ -1,0 +1,40 @@
+<?php
+
+namespace Solvians\CertificateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Currencie
+ *
+ * @ORM\Table(name="currencies")
+ * @ORM\Entity
+ */
+class Currencie
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="currencies", type="string", length=20, nullable=false)
+     */
+    private $currencies;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="abb", type="string", length=3, nullable=false)
+     */
+    private $abb;
+
+
+}
+

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Certificate</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ certificate.id }}</td>
+            </tr>
+            <tr>
+                <th>Isin</th>
+                <td>{{ certificate.isin }}</td>
+            </tr>
+            <tr>
+                <th>Tradingmarket</th>
+                <td>{{ certificate.tradingMarket }}</td>
+            </tr>
+            <tr>
+                <th>Currency</th>
+                <td>{{ certificate.currency.currency }}</td>
+            </tr>
+            <tr>
+                <th>Issuer</th>
+                <td>{{ certificate.issuer }}</td>
+            </tr>
+            <tr>
+                <th>Issuingprice</th>
+                <td>{{ certificate.issuingPrice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('certificates_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('certificates_edit', { 'id': certificate.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
