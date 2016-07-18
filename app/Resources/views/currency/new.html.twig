@@ -3,14 +3,25 @@
 {% block body %}
     <h1>Currency creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('currencies_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <div class="col-md-6 col-lg-6">
+        {{ form_start(form) }}
+        {{ form_row(form._token) }}
+        <div class="col-md-6 col-lg-12 form-group">
+            <div class="error">{{ form_errors(form.currency) }}</div>
+            {{ form_widget(form.currency, { 'type': 'text', 'attr': {'placeholder': 'Currency', 'class': 'form-control', 'id': 'currency'} }) }}
+        </div>
+        <br/>
+        <div class="col-md-12">
+            <input type="submit" value="Create" />
+        </div>
+        {{ form_end(form) }}
+    </div>
+    
+    <div class="col-md-6 col-lg-12">
+        <ul>
+            <li>
+                <a href="{{ path('currencies_index') }}">Back to the list</a>
+            </li>
+        </ul>
+    </div>
 {% endblock %}
