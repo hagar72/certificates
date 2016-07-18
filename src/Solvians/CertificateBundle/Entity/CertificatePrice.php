@@ -43,9 +43,12 @@ class CertificatePrice
      *   @ORM\JoinColumn(name="certificates_id", referencedColumnName="id", unique=true)
      * })
      */
-    private $certificates;
+    private $certificate;
 
-
+    public function __construct() {
+        // we set up "created"+"modified"
+        $this->setCreatedDate(new \DateTime());
+    }
 
     /**
      * Set id
@@ -122,24 +125,24 @@ class CertificatePrice
     /**
      * Set certificates
      *
-     * @param \Solvians\CertificateBundle\Entity\Certificate $certificates
+     * @param \Solvians\CertificateBundle\Entity\Certificate $certificate
      *
      * @return CertificatePrice
      */
-    public function setCertificates(\Solvians\CertificateBundle\Entity\Certificate $certificates = null)
+    public function setCertificate(\Solvians\CertificateBundle\Entity\Certificate $certificate = null)
     {
-        $this->certificates = $certificates;
+        $this->certificate = $certificate;
 
         return $this;
     }
 
     /**
-     * Get certificates
+     * Get certificate
      *
      * @return \Solvians\CertificateBundle\Entity\Certificate
      */
-    public function getCertificates()
+    public function getCertificate()
     {
-        return $this->certificates;
+        return $this->certificate;
     }
 }

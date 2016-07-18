@@ -32,6 +32,11 @@
                {{ form_widget(form.currentPrice, { 'attr': {'placeholder': 'Current Price', 'class': 'form-control', 'id': 'currentPrice'} }) }}
            </div>
 
+           <div class="col-md-6 col-lg-12 form-group">
+               <div class="error">{{ form_errors(form.certificateDocument) }}</div>
+               {{ form_widget(form.certificateDocument, { 'attr': {'placeholder': 'Document', 'class': 'form-control', 'id': 'certificateDocument'} }) }}
+           </div>
+           
            <br/>
            <div class="col-md-12">
                <input type="submit" value="Create" />

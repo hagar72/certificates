@@ -25,6 +25,7 @@ class CertificateType extends AbstractType
             ->add('issuer')
             ->add('issuingPrice')
             ->add('currentPrice', 'text', array('mapped' => false, 'required' => false))
+            ->add('certificateDocument', 'file', array('mapped' => false, 'data_class' => null, 'required' => false))
         ;
     }
     

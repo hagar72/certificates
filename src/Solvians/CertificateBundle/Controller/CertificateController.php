@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Solvians\CertificateBundle\Entity\Certificate;
 use Solvians\CertificateBundle\Form\CertificateType;
+use Solvians\CertificateBundle\Entity\CertificatePrice;
+use Solvians\CertificateBundle\Entity\CertificateDocument;
 
 /**
  * Certificate controller.
@@ -44,17 +46,33 @@ class CertificateController extends Controller
         $certificate = new Certificate();
         $form = $this->createForm('Solvians\CertificateBundle\Form\CertificateType', $certificate);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $parameters = $request->request->all();
+            $currentPrice = $parameters['certificate']['currentPrice'];
+            
+            $files = $request->files->all();
+            $document = $files['certificate']['certificateDocument'];
+            
             $em = $this->getDoctrine()->getManager();
-//            $currency = $certificate->getCurrency();
-//            if($currency instanceof Currency) {
-//                $certificate->setCurrency($currency->getId());
-//            } else {
-//                $currency = $em->getRepository('SolviansCertificateBundle:Currency')->findOneBy(array());
-//                $certificate->setCurrency($currency->getId());
-//            }
             $em->persist($certificate);
+            
+            $certificatePrice = new CertificatePrice();
+            $certificatePrice->setCertificate($certificate);
+            $certificatePrice->setPrice($currentPrice);
+            $em->persist($certificatePrice);
+            
+            $date = new \DateTime();
+            $fileName = md5(uniqid() . $date->format('Y-m-d H:s:i')).'.'.$document->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $document->move($this->getParameter('documentsDirectory'), $fileName);
+            
+            $certificateDocument = new CertificateDocument();
+            $certificateDocument->setCertificate($certificate);
+            $certificateDocument->setDocumentName($fileName);
+            $em->persist($certificateDocument);
+            
             $em->flush();
 
             return $this->redirectToRoute('certificates_show', array('id' => $certificate->getId()));

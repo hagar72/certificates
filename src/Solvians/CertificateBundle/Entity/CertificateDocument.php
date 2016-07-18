@@ -29,9 +29,22 @@ class CertificateDocument
      *   @ORM\JoinColumn(name="certificates_id", referencedColumnName="id")
      * })
      */
-    private $certificates;
+    private $certificate;
 
+    
+    /**
+     * Set documentName
+     *
+     * @param string $documentName
+     *
+     * @return CertificateDocument
+     */
+    public function setDocumentName($documentName = null)
+    {
+        $this->documentName = $documentName;
 
+        return $this;
+    }
 
     /**
      * Get documentName
@@ -44,26 +57,26 @@ class CertificateDocument
     }
 
     /**
-     * Set certificates
+     * Set certificate
      *
-     * @param \Solvians\CertificateBundle\Entity\Certificate $certificates
+     * @param \Solvians\CertificateBundle\Entity\Certificate $certificate
      *
      * @return CertificateDocument
      */
-    public function setCertificates(\Solvians\CertificateBundle\Entity\Certificate $certificates = null)
+    public function setCertificate(\Solvians\CertificateBundle\Entity\Certificate $certificate = null)
     {
-        $this->certificates = $certificates;
+        $this->certificate = $certificate;
 
         return $this;
     }
 
     /**
-     * Get certificates
+     * Get certificate
      *
      * @return \Solvians\CertificateBundle\Entity\Certificate
      */
-    public function getCertificates()
+    public function getCertificate()
     {
-        return $this->certificates;
+        return $this->certificate;
     }
 }
