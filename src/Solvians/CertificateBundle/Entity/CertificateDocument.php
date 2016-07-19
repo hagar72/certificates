@@ -13,11 +13,18 @@ use Doctrine\ORM\Mapping as ORM;
 class CertificateDocument
 {
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="document_name", type="string", length=45)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="document_name", type="string", length=45, nullable=false)
      */
     private $documentName;
 
@@ -31,7 +38,18 @@ class CertificateDocument
      */
     private $certificate;
 
-    
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * Set documentName
      *
@@ -39,7 +57,7 @@ class CertificateDocument
      *
      * @return CertificateDocument
      */
-    public function setDocumentName($documentName = null)
+    public function setDocumentName($documentName)
     {
         $this->documentName = $documentName;
 
