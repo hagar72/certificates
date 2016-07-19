@@ -29,7 +29,11 @@
         </div>
         <div class="col-md-6 col-lg-12 form-group">
             <div class="error">{{ form_errors(edit_form.currentPrice) }}</div>
-            {{ form_widget(edit_form.currentPrice, { 'attr': {'placeholder': 'Current Price', 'class': 'form-control', 'id': 'currentPrice'} }) }}
+            {{ form_widget(edit_form.currentPrice, { 'attr': {'placeholder': 'Current Price', 'class': 'form-control', 'id': 'currentPrice', 'value': certificateCurrentPrice.price} }) }}
+        </div>
+        <div class="col-md-6 col-lg-12 form-group">
+            <div class="error">{{ form_errors(edit_form.certificateDocument) }}</div>
+            {{ form_widget(edit_form.certificateDocument, { 'attr': {'placeholder': 'Document', 'class': 'form-control', 'id': 'certificateDocument'} }) }}
         </div>
 
         <br/>

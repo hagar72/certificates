@@ -8,10 +8,11 @@
             <tr>
                 <th>Id</th>
                 <th>Isin</th>
-                <th>Tradingmarket</th>
+                <th>Trading market</th>
                 <th>Currency</th>
                 <th>Issuer</th>
-                <th>Issuingprice</th>
+                <th>Issuing price</th>
+                <th>Current price</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,6 +25,11 @@
                 <td>{{ certificate.currency.currency }}</td>
                 <td>{{ certificate.issuer }}</td>
                 <td>{{ certificate.issuingPrice }}</td>
+                <td>
+                    {% if certificate.getLastPrice.price is defined %}
+                        {{ certificate.getLastPrice.price }}
+                    {% endif %}
+                </td>
                 <td>
                     <ul>
                         <li>

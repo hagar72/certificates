@@ -29,6 +29,16 @@
                 <th>Issuingprice</th>
                 <td>{{ certificate.issuingPrice }}</td>
             </tr>
+            <tr>
+                <th>Price History</th>
+                <td>
+                    <ul>
+                    {% for certificatePrice in certificate.getPriceHistory %}
+                        <li>{{ certificatePrice.price }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 

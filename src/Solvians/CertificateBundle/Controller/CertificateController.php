@@ -10,6 +10,7 @@ use Solvians\CertificateBundle\Entity\Certificate;
 use Solvians\CertificateBundle\Form\CertificateType;
 use Solvians\CertificateBundle\Entity\CertificatePrice;
 use Solvians\CertificateBundle\Entity\CertificateDocument;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Certificate controller.
@@ -113,17 +114,42 @@ class CertificateController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $parameters = $request->request->all();
+            $currentPrice = $parameters['certificate']['currentPrice'];
+            
+            $files = $request->files->all();
+            $document = $files['certificate']['certificateDocument'];
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($certificate);
+            
+            $certificatePrice = new CertificatePrice();
+            $certificatePrice->setCertificate($certificate);
+            $certificatePrice->setPrice($currentPrice);
+            $em->persist($certificatePrice);
+            
+            if($document instanceof UploadedFile) {
+                $date = new \DateTime();
+                $fileName = md5(uniqid() . $date->format('Y-m-d H:s:i')).'.'.$document->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                $document->move($this->getParameter('documentsDirectory'), $fileName);
+                $certificateDocument = new CertificateDocument();
+                $certificateDocument->setCertificate($certificate);
+                $certificateDocument->setDocumentName($fileName);
+                $em->persist($certificateDocument);
+            }
+            
             $em->flush();
 
-            return $this->redirectToRoute('certificates_edit', array('id' => $certificate->getId()));
+            return $this->redirectToRoute('certificates_show', array('id' => $certificate->getId()));
         }
 
         return $this->render('certificate/edit.html.twig', array(
             'certificate' => $certificate,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'certificateCurrentPrice' => $certificate->getLastPrice()
         ));
     }
 

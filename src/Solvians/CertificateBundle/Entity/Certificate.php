@@ -58,8 +58,11 @@ class Certificate
      * })
      */
     private $currency;
-
-
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Solvians\CertificateBundle\Entity\CertificatePrice", mappedBy="certificate" )
+     */
+    private $priceHistory;
 
     /**
      * Set id
@@ -203,5 +206,34 @@ class Certificate
     public function getCurrency()
     {
         return $this->currency;
+    }
+    
+    /**
+     * set price history
+     * 
+     * @param \Doctrine\Common\Collections\ArrayCollection $priceHistory
+     * @return \Solvians\CertificateBundle\Entity\Certificate
+     */
+    public function setPriceHistory(\Doctrine\Common\Collections\ArrayCollection $priceHistory) {
+        $this->priceHistory = $priceHistory;
+        return $this;
+    }
+    
+    /**
+     * get price history
+     * 
+     * @return \Doctrine\Common\Collections\ArrayCollection $priceHistory
+     */
+    public function getPriceHistory() {
+        return $this->priceHistory;
+    }
+    
+    /**
+     * get last price
+     * 
+     * @return string $lastPrice
+     */
+    public function getLastPrice() {
+        return $this->getPriceHistory()->last();
     }
 }
