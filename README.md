@@ -7,6 +7,8 @@ To install:
 - Run "composer install" command
 - Create certificates database in mysql databases and import the database/certificates.sql file into it
 - Change database credentials in app/config/parameters.yml
+- Give read/write permissions to app/cache , app/logs, and web folders
+- On terminal run this command to create style files "app/console assets:install"
 - Locate your browser to http://localhost/certificates/web/app_dev.php/certificates/ according to your webserver configuration
 
 
