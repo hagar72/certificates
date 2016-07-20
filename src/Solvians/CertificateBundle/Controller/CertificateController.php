@@ -53,7 +53,7 @@ class CertificateController extends Controller
             $currentPrice = $parameters['certificate']['currentPrice'];
             
             $files = $request->files->all();
-            $document = $files['certificate']['certificateDocument'];
+            $document = isset($files['certificate']['certificateDocument'])? $files['certificate']['certificateDocument']: null;
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($certificate);
@@ -63,17 +63,18 @@ class CertificateController extends Controller
             $certificatePrice->setPrice($currentPrice);
             $em->persist($certificatePrice);
             
-            $date = new \DateTime();
-            $fileName = md5(uniqid() . $date->format('Y-m-d H:s:i')).'.'.$document->guessExtension();
+            if($document instanceof UploadedFile) {
+                $date = new \DateTime();
+                $fileName = md5(uniqid() . $date->format('Y-m-d H:s:i')).'.'.$document->guessExtension();
 
-            // Move the file to the directory where brochures are stored
-            $document->move($this->getParameter('documentsDirectory'), $fileName);
-            
-            $certificateDocument = new CertificateDocument();
-            $certificateDocument->setCertificate($certificate);
-            $certificateDocument->setDocumentName($fileName);
-            $em->persist($certificateDocument);
-            
+                // Move the file to the directory where brochures are stored
+                $document->move($this->getParameter('documentsDirectory'), $fileName);
+
+                $certificateDocument = new CertificateDocument();
+                $certificateDocument->setCertificate($certificate);
+                $certificateDocument->setDocumentName($fileName);
+                $em->persist($certificateDocument);
+            }
             $em->flush();
 
             return $this->redirectToRoute('certificates_show', array('id' => $certificate->getId()));
@@ -118,7 +119,7 @@ class CertificateController extends Controller
             $currentPrice = $parameters['certificate']['currentPrice'];
             
             $files = $request->files->all();
-            $document = $files['certificate']['certificateDocument'];
+            $document = isset($files['certificate']['certificateDocument'])? $files['certificate']['certificateDocument']: null;
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($certificate);
@@ -145,11 +146,13 @@ class CertificateController extends Controller
             return $this->redirectToRoute('certificates_show', array('id' => $certificate->getId()));
         }
 
+        $lastPrice = $certificate->getLastPrice();
+        $certificateCurrentPrice = ($lastPrice instanceof CertificatePrice)? $lastPrice->getPrice(): 0;
         return $this->render('certificate/edit.html.twig', array(
             'certificate' => $certificate,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'certificateCurrentPrice' => $certificate->getLastPrice()
+            'certificateCurrentPrice' => $certificateCurrentPrice
         ));
     }
 

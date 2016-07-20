@@ -3,6 +3,7 @@
 namespace Solvians\CertificateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Certificate
@@ -25,6 +26,11 @@ class Certificate
      * @var string
      *
      * @ORM\Column(name="isin", type="string", length=45, nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $isin;
 
@@ -32,6 +38,8 @@ class Certificate
      * @var string
      *
      * @ORM\Column(name="trading_market", type="string", length=45, nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
      */
     private $tradingMarket;
 
@@ -39,6 +47,7 @@ class Certificate
      * @var string
      *
      * @ORM\Column(name="issuer", type="string", length=45, nullable=true)
+     * @Assert\Type("string")
      */
     private $issuer;
 
@@ -46,6 +55,7 @@ class Certificate
      * @var string
      *
      * @ORM\Column(name="issuing_price", type="string", length=45, nullable=true)
+     * @Assert\NotBlank()
      */
     private $issuingPrice;
 
@@ -60,7 +70,8 @@ class Certificate
     private $currency;
     
     /**
-     * @ORM\OneToMany(targetEntity="Solvians\CertificateBundle\Entity\CertificatePrice", mappedBy="certificate" )
+     * @ORM\OneToMany(targetEntity="Solvians\CertificateBundle\Entity\CertificatePrice", mappedBy="certificate",cascade={"remove"} )
+     * 
      */
     private $priceHistory;
 

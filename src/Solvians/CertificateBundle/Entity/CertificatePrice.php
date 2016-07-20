@@ -38,7 +38,7 @@ class CertificatePrice
     /**
      * @var \Solvians\CertificateBundle\Entity\Certificate
      *
-     * @ORM\ManyToOne(targetEntity="Solvians\CertificateBundle\Entity\Certificate", inversedBy="certificatePrices",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Solvians\CertificateBundle\Entity\Certificate", inversedBy="certificatePrices")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="certificates_id", referencedColumnName="id", unique=true)
      * })

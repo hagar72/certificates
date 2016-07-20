@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 19, 2016 at 11:24 PM
+-- Generation Time: Jul 20, 2016 at 10:48 PM
 -- Server version: 5.5.49-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.16
 
@@ -40,7 +40,9 @@ CREATE TABLE `certificates` (
 --
 
 INSERT INTO `certificates` (`id`, `isin`, `trading_market`, `currency`, `issuer`, `issuing_price`) VALUES
-(1, 'asdfs', 'sdfsdf', 1, 'sdf', 'dff');
+(1, '1111', 'London', 1, 'John', '33.1'),
+(2, '2222', 'Berlin', 1, 'John', '22.1'),
+(3, '4444', 'Paris', 1, 'Deo', '12');
 
 -- --------------------------------------------------------
 
@@ -81,10 +83,12 @@ CREATE TABLE `certificate_prices` (
 
 INSERT INTO `certificate_prices` (`id`, `certificates_id`, `price`, `created_date`) VALUES
 (1, 1, '56', '2016-07-19 23:11:23'),
-(2, 1, '', '2016-07-19 23:11:33'),
+(2, 1, '5', '2016-07-19 23:11:33'),
 (3, 1, '222', '2016-07-19 23:12:03'),
-(4, 1, '22z', '2016-07-19 23:20:28'),
-(5, 1, '223', '2016-07-19 23:20:57');
+(4, 1, '22', '2016-07-19 23:20:28'),
+(5, 1, '223', '2016-07-19 23:20:57'),
+(6, 2, '2', '2016-07-19 23:36:49'),
+(7, 3, '7', '2016-07-19 23:38:18');
 
 -- --------------------------------------------------------
 
@@ -145,7 +149,7 @@ ALTER TABLE `currencies`
 -- AUTO_INCREMENT for table `certificates`
 --
 ALTER TABLE `certificates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `certificate_documents`
 --
@@ -155,7 +159,7 @@ ALTER TABLE `certificate_documents`
 -- AUTO_INCREMENT for table `certificate_prices`
 --
 ALTER TABLE `certificate_prices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `currencies`
 --
