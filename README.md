@@ -14,3 +14,4 @@ To install:
 
 - You can check certificates unit tests on this file src/Solvians/CertificateBundle/Tests/Controller/CertificateControllerTest.php
 - And you can run it using this command "bin/phpunit -c app/ --filter=CertificateControllerTest" on the root path of the application
+- You can find the ERD diagram and sql file of database under /database folder ERD diagram could be opened using mysql workbench program
